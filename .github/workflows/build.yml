@@ -41,12 +41,12 @@ jobs:
         with: { name: Open-windows, path: dist/*.exe }
 
   macos:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         include:
           - { os: macos-14, arch: arm64 }
           - { os: macos-15-intel, arch: x64 }
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: Collect device tools
@@ -64,4 +64,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v4
-        with: { name: Open-mac-${{ matrix.arch }}, path: dist/*.dmg }
+        with:
+          name: Open-mac-${{ matrix.arch }}
+          path: dist/*.dmg
