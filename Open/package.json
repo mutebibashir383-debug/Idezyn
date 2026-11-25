@@ -1,0 +1,55 @@
+{
+  "name": "open",
+  "productName": "Open",
+  "version": "1.4.0",
+  "description": "iPhone recovery and system repair utility",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "dist:win": "electron-builder --win nsis --publish onTag",
+    "dist:mac": "electron-builder --mac dmg --publish onTag"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.5fyn.open",
+    "productName": "Open",
+    "files": [
+      "src/**/*",
+      "renderer/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/bin",
+        "to": "bin"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities",
+      "hardenedRuntime": true,
+      "icon": "build/icon.png"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "mutebibashir383-debug",
+      "repo": "Idezyn",
+      "releaseType": "release"
+    },
+    "asar": true
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.0"
+  },
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "5FYN",
+  "homepage": "https://mutebibashir383-debug.github.io/Idezyn/"
+}
