@@ -45,8 +45,11 @@ jobs:
       - run: npm run dist:win
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: List dist directory
+        run: |
+          ls -la Open/dist/
       - uses: actions/upload-artifact@v4
-        with: { name: Open-windows, path: dist/*.exe }
+        with: { name: Open-windows, path: Open/dist/*.exe }
 
   macos:
     runs-on: ${{ matrix.os }}
