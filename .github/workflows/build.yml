@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: '0 6 1 * *'   # monthly rebuild picks up the latest device tools
 
+defaults:
+  run:
+    working-directory: Open
+
 permissions:
   contents: write
 
