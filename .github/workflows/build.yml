@@ -28,9 +28,13 @@ jobs:
         run: |
           mkdir -p resources/bin
           for t in idevice_id ideviceinfo ideviceenterrecovery irecovery idevicerestore idevicebackup2 idevicediagnostics idevicecrashreport; do
-            cp /ucrt64/bin/$t.exe resources/bin/
+            if [ -f "/ucrt64/bin/$t.exe" ]; then
+              cp "/ucrt64/bin/$t.exe" resources/bin/
+            elif [ -f "/ucrt64/bin/x86_64-w64-mingw32-$t.exe" ]; then
+              cp "/ucrt64/bin/x86_64-w64-mingw32-$t.exe" resources/bin/
+            fi
           done
-          ldd resources/bin/*.exe | awk '/mingw64/{print $3}' | sort -u | xargs -I{} cp {} resources/bin/
+          ldd resources/bin/*.exe | awk '/ucrt64/{print $3}' | sort -u | xargs -I{} cp {} resources/bin/
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
       - run: npm install
